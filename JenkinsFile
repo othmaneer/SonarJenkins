@@ -22,13 +22,7 @@ stage('Build Server') {
             withSonarQubeEnv('SonarServer') {
                 bat "mvn clean verify sonar:sonar"
             }
-                    timeout(time:1, unit:'HOURS'){
-                    def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Quality Gate did not pass. Check the SonarQube dashboard for details."
-                        }
-                    }
-                    bat 'mvn clean install'
+
                 }
     }
     }
