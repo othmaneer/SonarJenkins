@@ -63,5 +63,37 @@ stage('Build Client') {
     }
 }
 
+stage('Build Evenement') {
+    steps {
+    script{
+        dir('evenement') {
+
+            withSonarQubeEnv('SonarServer') {
+                bat "mvn clean verify sonar:sonar"
+            }
+
+                }
+
+
+    }
+    }
+}
+
+stage('Build Reservation') {
+    steps {
+    script{
+        dir('reservation') {
+
+            withSonarQubeEnv('SonarServer') {
+                bat "mvn clean verify sonar:sonar"
+            }
+
+                }
+
+
+    }
+    }
+}
+
     }
 }
