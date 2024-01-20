@@ -34,7 +34,7 @@ stage('Build Server') {
 stage('Build Admin') {
     steps {
     script{
-        dir('Admin') {
+        dir('admin') {
 
             withSonarQubeEnv('SonarServer') {
                 bat "mvn clean verify sonar:sonar"
