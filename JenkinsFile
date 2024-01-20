@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+
+    stages {
+        stage('Git Clone') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/othmaneer/SonarJenkins.git']]])
+
+                }
+            }
+        }
+
+stage('Build Server') {
+    steps {
+    script{
+        dir('server') {
+
+            withSonarQubeEnv('sonarserver') {
+                bat "mvn clean verify sonar:sonar"
+            }
+                    timeout(time:1, unit:'HOURS'){
+                    def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Quality Gate did not pass. Check the SonarQube dashboard for details."
+                        }
+                    }
+                    bat 'mvn clean install'
+                }
+    }
+    }
+}
+
+    }
+}
