@@ -24,6 +24,14 @@ stage('Build Server') {
             }
 
                 }
+
+        dir('admin') {
+
+                    withSonarQubeEnv('SonarAdmin') {
+                        bat "mvn clean verify sonar:sonar"
+                    }
+
+                        }
     }
     }
 }
