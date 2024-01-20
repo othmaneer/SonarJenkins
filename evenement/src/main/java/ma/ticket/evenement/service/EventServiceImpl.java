@@ -38,7 +38,7 @@ public class EventServiceImpl implements EventService{
             event1.setType(event.getType());
             System.out.println("weeb hook test");
             System.out.println("weeb hook test ");
-            System.out.println("weeb hook test ");
+            System.out.println("hook test ");
 
 
             return eventRepository.save(event1);
