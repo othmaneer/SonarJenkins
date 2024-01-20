@@ -47,5 +47,21 @@ stage('Build Admin') {
     }
 }
 
+stage('Build Client') {
+    steps {
+    script{
+        dir('client') {
+
+            withSonarQubeEnv('SonarServer') {
+                bat "mvn clean verify sonar:sonar"
+            }
+
+                }
+
+
+    }
+    }
+}
+
     }
 }
