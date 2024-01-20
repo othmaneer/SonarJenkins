@@ -19,7 +19,7 @@ stage('Build Server') {
     script{
         dir('server') {
 
-            withSonarQubeEnv('sonarserver') {
+            withSonarQubeEnv('SonarServer') {
                 bat "mvn clean verify sonar:sonar"
             }
                     timeout(time:1, unit:'HOURS'){
